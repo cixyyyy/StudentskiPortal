@@ -1,0 +1,57 @@
+﻿@model IEnumerable<dynamic>
+
+@{
+    ViewBag.Title = "Pregled prijava studenata";
+}
+
+<h2>Pregled prijava studenata</h2>
+
+<!-- forma za filtriranje po roku -->
+<form method="get" asp-action="PregledPrijava" class="mb-3">
+    <div class="row g-2">
+        <div class="col-auto">
+            <select name="rok" class="form-select">
+                    <option value="">-- Izaberite rok --</option>
+                @foreach (var r in ViewBag.Rokovi)
+                {
+                    if (r == ViewBag.Rok)
+                    {
+                                        <option value="@r" selected>@r</option>
+                    }
+                    else
+                    {
+                                        <option value="@r">@r</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-auto">
+            <input type="hidden" name="profesorID" value="@ViewBag.ProfesorID" />
+            <button type="submit" class="btn btn-primary">Filtriraj</button>
+        </div>
+    </div>
+</form>
+
+<!-- tabela sa brojem prijavljenih po predmetu -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Predmet</th>
+            <th>Broj prijavljenih studenata</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>@item.Predmet</td>
+                    <td>@item.BrojPrijavljenih</td>
+                </tr>
+        }
+    </tbody>
+</table>
+
+<!-- dugme za export CSV -->
+<a asp-action="ExportCsv" asp-route-profesorID="@ViewBag.ProfesorID" asp-route-rok="@ViewBag.Rok" class="btn btn-success">
+    Preuzmi listu prijavljenih
+</a>

@@ -1,0 +1,67 @@
+﻿@model PrijavaIspita.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+@* Dodato prikaz grešaka *@
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<form asp-action="Register" method="post">
+    <div class="form-group">
+        <label asp-for="Ime"></label>
+        <input asp-for="Ime" class="form-control" />
+        <span asp-validation-for="Ime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Prezime"></label>
+        <input asp-for="Prezime" class="form-control" />
+        <span asp-validation-for="Prezime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ConfirmPassword"></label>
+        <input asp-for="ConfirmPassword" type="password" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SmerId">Smer</label>
+        <select asp-for="SmerId" asp-items="@(new SelectList(ViewBag.Smerovi, "SmerId", "Naziv"))" class="form-control"></select>
+        <span asp-validation-for="SmerId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DatumRodjenja"></label>
+        <input asp-for="DatumRodjenja" type="date" class="form-control" />
+        <span asp-validation-for="DatumRodjenja" class="text-danger"></span>
+    </div>
+
+    @* Novo polje za GodinaUpisa *@
+    <div class="form-group">
+        <label asp-for="GodinaUpisa"></label>
+        <input asp-for="GodinaUpisa" type="number" class="form-control" min="2000" max="2100"/>
+        <span asp-validation-for="GodinaUpisa" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+}

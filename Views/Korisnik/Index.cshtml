@@ -1,0 +1,36 @@
+﻿@model IEnumerable<PrijavaIspita.Models.KorisnikBO>
+
+@{
+    ViewData["Title"] = "Lista korisnika";
+}
+
+<h2 class="mb-3">Lista korisnika</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Dodaj korisnika</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Smer</th>
+            <th style="width: 150px;">Akcije</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var korisnik in Model)
+        {
+                    <tr>
+                        <td>@korisnik.Ime</td>
+                        <td>@korisnik.Prezime</td>
+                        <td>@korisnik.Smer?.Naziv</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@korisnik.Id" class="btn btn-sm btn-warning">Izmeni</a>
+                            <a asp-action="Delete" asp-route-id="@korisnik.Id" class="btn btn-sm btn-danger">Obriši</a>
+                        </td>
+                    </tr>
+        }
+    </tbody>
+</table>

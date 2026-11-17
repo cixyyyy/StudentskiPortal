@@ -1,0 +1,10 @@
+﻿namespace PrijavaIspita.Models
+{
+    public class Role
+    {
+        public int RoleID { get; set; }
+        public string RoleName { get; set; } = null!;
+
+        public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+    }
+}

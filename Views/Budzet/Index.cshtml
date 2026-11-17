@@ -1,0 +1,30 @@
+﻿@model IEnumerable<PrijavaIspita.Models.ZahtevBudzet>
+
+<h2>Budžeti studenata</h2>
+
+<table class="table">
+    <tr>
+        <th>Student</th>
+        <th>Zatraženi iznos</th>
+        <th>Status</th>
+        <th>Datum</th>
+        <th>Akcije</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+            <tr>
+                <td>@item.Korisnik.Ime @item.Korisnik.Prezime</td>
+                <td>@item.Kolicina.ToString("0.00") RSD</td>
+                <td>@item.Status</td>
+                <td>@item.Datum.ToShortDateString()</td>
+                <td>
+                @* Dugmad se prikazuje samo ako je status "Na čekanju" *@
+                @if (item.Status.ToLower().Contains("na čekanju"))
+                {
+                    <a asp-controller="Budzet" asp-action="Odobri" asp-route-id="@item.ZahtevBudzetId" class="btn btn-sm btn-success">Odobri</a>
+                    <a asp-controller="Budzet" asp-action="Odbij" asp-route-id="@item.ZahtevBudzetId" class="btn btn-sm btn-warning">Odbij</a>
+                }
+                </td>
+            </tr>
+    }
+</table>

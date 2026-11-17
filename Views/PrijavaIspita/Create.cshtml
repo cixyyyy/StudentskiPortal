@@ -1,0 +1,52 @@
+﻿@model PrijavaIspita.Models.PrijavaIspitaBO
+
+@{
+    ViewBag.Title = "Nova prijava ispita";
+}
+
+<h2>Nova prijava ispita</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label class="control-label">Predmet</label>
+        @Html.DropDownList(
+                     "PredmetId",
+                     new SelectList(ViewBag.Predmeti, "Id", "Naziv"),
+                     "Selektuj predmet",
+                     new { @class = "form-control" }
+                 )
+        @Html.ValidationMessageFor(model => model.Predmet.Id, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Korisnik</label>
+        @Html.DropDownList(
+                     "KorisnikId",
+                     new SelectList(ViewBag.Korisnici, "Id", "ImePrezime"),
+                     "Selektuj korisnika",
+                     new { @class = "form-control" }
+                 )
+        @Html.ValidationMessageFor(model => model.Korisnik.Id, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Ocena</label>
+        @Html.EditorFor(model => model.Ocena, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Ocena, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Rok</label>
+        @Html.DropDownListFor(
+                     model => model.Rok,
+                     new SelectList(new List<string> { "Januarski", "Junski", "Julski", "Septembarski", "Oktobarski" }),
+                     "Selektuj rok",
+                     new { @class = "form-control" }
+                 )
+        @Html.ValidationMessageFor(model => model.Rok, "", new { @class = "text-danger" })
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary">Dodaj prijavu</button>
+    <a asp-action="Index" class="btn btn-secondary">Nazad</a>
+</form>

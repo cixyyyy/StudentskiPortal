@@ -1,0 +1,19 @@
+﻿@model IEnumerable<PrijavaIspita.Models.ObavestenjeBO>
+
+<h2>Vaša obaveštenja</h2>
+
+@if (!Model.Any())
+{
+        <div class="alert alert-info">Nemate novih obaveštenja.</div>
+}
+else
+{
+        <ul class="list-group">
+        @foreach (var o in Model)
+        {
+                    <li class="list-group-item">
+                        <strong>@o.Datum.ToString("dd.MM.yyyy HH:mm")</strong> - @o.Tekst
+                    </li>
+        }
+        </ul>
+}

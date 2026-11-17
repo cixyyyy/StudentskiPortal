@@ -1,0 +1,27 @@
+﻿@model IEnumerable<PrijavaIspita.Models.TransakcijaBO>
+
+<h2>Finansijske transakcije</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Email</th>
+            <th>Tip</th>
+            <th>Iznos</th>
+            <th>Datum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var t in Model)
+        {
+                <tr>
+                    <td>@t.Korisnik.ImePrezime</td>
+                    <td>@t.Korisnik.Email</td>
+                    <td>@t.Tip</td>
+                    <td>@t.Iznos</td>
+                    <td>@t.Datum.ToShortDateString()</td>
+                </tr>
+        }
+    </tbody>
+</table>

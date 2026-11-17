@@ -1,0 +1,36 @@
+﻿@model PrijavaIspita.Models.PredmetBO
+@{
+    ViewBag.Title = "Dodaj novi predmet";
+}
+
+<h2>Dodaj novi predmet</h2>
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<form asp-action="Create" asp-controller="Predmet" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group mb-2">
+        <label asp-for="Naziv"></label>
+        <input asp-for="Naziv" class="form-control" />
+        <span asp-validation-for="Naziv" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-2">
+        <label asp-for="ProfesorID">Profesor</label>
+        <select asp-for="ProfesorID" class="form-control" asp-items="ViewBag.Profesori">
+            <option value="">-- Odaberite profesora --</option>
+        </select>
+        <span asp-validation-for="ProfesorID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-2">
+        <label asp-for="SmerId">Smer</label>
+        <select asp-for="SmerId" class="form-control" asp-items="ViewBag.Smerovi">
+            <option value="">-- Odaberite smer --</option>
+        </select>
+        <span asp-validation-for="SmerId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Dodaj novi predmet</button>
+</form>

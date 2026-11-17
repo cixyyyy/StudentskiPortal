@@ -1,0 +1,101 @@
+﻿@model IEnumerable<PrijavaIspita.Models.PrijavaIspitaBO>
+
+<h2>Prijava ispita</h2>
+
+<!-- stanje budzeta -->
+<div style="text-align: right; font-weight: bold; margin-bottom: 15px;">
+    Stanje budžeta: @(ViewBag.StanjeBudzet != null ? ViewBag.StanjeBudzet.ToString("0.00") : "0.00") RSD
+</div>
+
+<!-- prijava ispita -->
+<form id="prijavaForm" asp-action="PrijaviPredmet" method="post">
+    <div class="row align-items-end">
+        <div class="col-md-3">
+            <label>Predmeti</label>
+            <select name="PredmetId" class="form-control">
+                <option value="">Selektuj predmet</option>
+                @foreach (var p in ViewBag.Predmeti)
+                {
+                            <option value="@p.Id">@p.Naziv</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label>Rok</label>
+            <select name="Rok" class="form-control" id="rokSelect">
+                <option value="">Selektuj rok</option>
+                @foreach (var r in ViewBag.Rokovi)
+                {
+                            <option value="@r">@r</option>
+                }
+            </select>
+            <span id="rokError" class="text-danger" style="display:none;">Morate odabrati rok.</span>
+        </div>
+
+        <div class="col-md-3" style="margin-top: 25px;">
+            <button type="submit" class="btn btn-primary">Prijavi predmet</button>
+        </div>
+    </div>
+</form>
+
+<br />
+
+<!-- zahtev za budzet -->
+<form id="budzetForm" asp-action="PosaljiZahtevBudzet" method="post">
+    <div class="row align-items-end">
+        <div class="col-md-3">
+            <input type="number" step="0.01" name="kolicina" class="form-control" id="kolicinaInput" placeholder="Unesi iznos" />
+            <span id="kolicinaError" class="text-danger" style="display:none;">Molim vas unesite iznos koji želite da zatražite.</span>
+        </div>
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-success">Pošalji zahtev za budžet</button>
+        </div>
+    </div>
+</form>
+
+<br />
+
+<div id="Ispiti">
+    @Html.Partial("ListaIspita", Model)
+</div>
+
+@if (TempData["Uspesno"] != null)
+{
+            <div class="alert alert-success">@TempData["Uspesno"]</div>
+}
+
+@if (TempData["Greska"] != null)
+{
+            <div class="alert alert-danger">@TempData["Greska"]</div>
+}
+
+@section Scripts {
+        <script>
+            // Provera prijave ispita - skripta
+            document.getElementById('prijavaForm').addEventListener('submit', function (e) {
+                var rokSelect = document.getElementById('rokSelect');
+                var error = document.getElementById('rokError');
+
+                if (rokSelect.value === "") {
+                    e.preventDefault();
+                    error.style.display = 'block';
+                } else {
+                    error.style.display = 'none';
+                }
+            });
+
+            // Provera unosa iznosa za budzet - skripta
+            document.getElementById('budzetForm').addEventListener('submit', function(e) {
+                var kolicina = document.getElementById('kolicinaInput');
+                var error = document.getElementById('kolicinaError');
+
+                if (kolicina.value === "" || parseFloat(kolicina.value) <= 0) {
+                    e.preventDefault();
+                    error.style.display = 'block';
+                } else {
+                    error.style.display = 'none';
+                }
+            });
+        </script>
+}

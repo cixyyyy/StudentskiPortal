@@ -1,0 +1,41 @@
+/* --- Page / body --- */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.45;
+    color: #222;
+    background: #d8dade;
+    margin: 0;
+}
+
+/* --- Navbar --- */
+.navbar {
+    background: #f2c5c5;
+    border-bottom: 1px solid #222;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+}
+
+/* logo on the left side of navbar */
+.navbar-brand img {
+    height: 38px;
+    width: auto;
+    display: block;
+}
+
+/* navbar links */
+.navbar .nav-link {
+    color: #2d3748;
+    padding: .6rem 1rem;
+    transition: color .15s ease;
+    border-left: 1px solid #e6e9ef;
+}
+
+/* first item without left border */
+.navbar .nav-item:first-child .nav-link {
+    border-left: none;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+    color: #0b5ed7;
+}

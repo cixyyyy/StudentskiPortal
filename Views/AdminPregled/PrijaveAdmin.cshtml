@@ -1,0 +1,27 @@
+﻿@model IEnumerable<PrijavaIspita.Models.PrijavaIspitaBO>
+
+<h2>Prijave studenata</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Predmet</th>
+            <th>Student</th>
+            <th>Ocena</th>
+            <th>Rok</th>
+            <th>Datum prijave</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>@item.Predmet.Naziv</td>
+                    <td>@item.Korisnik.ImePrezime</td>
+                    <td>@item.Ocena</td>
+                    <td>@item.Rok</td>
+                    <td>@item.DatumPrijave.ToShortDateString()</td>
+                </tr>
+        }
+    </tbody>
+</table>

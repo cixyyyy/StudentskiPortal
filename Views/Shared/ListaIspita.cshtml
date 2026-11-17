@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<PrijavaIspita.Models.PrijavaIspitaBO>
+
+<table class="table">
+    <tr>
+        <th>Smer</th>
+        <th>Ime i prezime</th>
+        <th>Predmet</th>
+        <th>Ocena</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Korisnik.Smer.Naziv)</td>
+                    <td>@item.Korisnik.Ime @item.Korisnik.Prezime</td>
+                    <td>@Html.DisplayFor(modelItem => item.Predmet.Naziv)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Ocena)</td>
+                </tr>
+    }
+</table>
+

@@ -1,0 +1,17 @@
+﻿@model List<string>
+
+<h2>Obaveštenja</h2>
+
+@if (Model.Count == 0)
+{
+        <p>Nemate novih obaveštenja.</p>
+}
+else
+{
+        <ul>
+        @foreach (var poruka in Model)
+        {
+                    <li>@poruka</li>
+        }
+        </ul>
+}

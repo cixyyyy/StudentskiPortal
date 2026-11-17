@@ -1,0 +1,19 @@
+﻿@model PrijavaIspita.Models.BudzetBO
+
+@{
+    ViewBag.Title = "Potvrda brisanja budžeta";
+}
+
+<h2>Potvrda brisanja</h2>
+
+<div class="alert alert-warning">
+    <p>Da li ste sigurni da želite da obrišete budžet korisnika 
+       <strong>@Model.Korisnik.Ime @Model.Korisnik.Prezime</strong> 
+       sa iznosom <strong>@Model.Iznos</strong>?</p>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Da, obriši</button>
+    <a asp-action="Index" class="btn btn-secondary">Otkaži</a>
+</form>

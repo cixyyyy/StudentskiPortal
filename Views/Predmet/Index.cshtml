@@ -1,0 +1,49 @@
+﻿@model IEnumerable<PrijavaIspita.Models.PredmetBO>
+
+@{
+    ViewBag.Title = "Predmeti";
+}
+
+<h2>Lista predmeta</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+        <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+        </div>
+}
+
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-success">Dodaj novi predmet</a>
+</div>
+
+<form asp-action="DeletePredmete" method="post" 
+      onsubmit="return confirm('Da li ste sigurni da želite obrisati označene predmete?');">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Naziv predmeta</th>
+                <th>Profesor</th>
+                <th>Akcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="predmeti" value="@item.Id" />
+                        </td>
+                        <td>@item.Naziv</td>
+                            <td>@item.ProfesorImePrezime</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Izmeni</a>
+                        </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-danger">Obriši označene predmete</button>
+</form>
